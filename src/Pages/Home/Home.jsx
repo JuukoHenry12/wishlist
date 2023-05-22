@@ -6,7 +6,7 @@ import { useState } from "react";
 import Select from "react-select";
 import { addUser } from "../../../redux/api/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Notifications, {notify} from 'react-notify-toast';
+
 
 const Home = () => {
   const logo =
