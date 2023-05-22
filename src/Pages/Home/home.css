@@ -1,0 +1,31 @@
+
+.react-tel-input {
+    margin-left: 10px;
+    border-radius:15px;
+    border: none;
+    width:93%;
+}
+.select{
+    width:90%;
+    margin:10px; 
+    background-color: #eee;
+    border-radius:15px;
+    border: none;
+}
+
+
+.css-w9q2zk-Input2 {
+    visibility: visible;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    display: inline-grid;
+    grid-area: 1/1/2/3;
+    grid-template-columns: 0 min-content;
+    margin: 2px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    color: #000;
+    box-sizing: border-box;
+}
+
