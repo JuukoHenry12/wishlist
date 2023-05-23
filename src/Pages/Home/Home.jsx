@@ -20,6 +20,9 @@ const Home = () => {
   const [NinNumber, setNinNumber] = useState();
   const [selectedOption, setSelectedOption] = useState(null);
   const [error, setError] = useState("");
+  const [isValid, setIsValid] = useState(false);
+
+
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
@@ -63,6 +66,22 @@ const Home = () => {
   };
 
 
+  const validateNationalID=()=>{
+    const pattern = /^([CP])(\d{2})(\d{2})(\d{2})(\d{4})(\d)$/;
+    if(!pattern.test(NinNumber)){
+      setIsValid(false)
+      return ;
+    }
+    const [ year, month, day, uniqueID, checkDigit] =NinNumber.match(pattern);
+
+    // Calculate check digit
+    const calculatedCheckDigit = (parseInt(year) +
+      parseInt(month) +
+      parseInt(day) +
+      parseInt(uniqueID)) % 10;
+
+    setIsValid(parseInt(checkDigit) === calculatedCheckDigit);
+  }
 
   return (
     <div className="mt-20 items-center flex justify-center">
@@ -102,7 +121,7 @@ const Home = () => {
             />
             <Select
               className="select"
-              // defaultValue={}
+              placeholder="Select Place of Pick Up"
               value={selectedOption}
               onChange={setSelectedOption}
               options={options}
@@ -112,8 +131,11 @@ const Home = () => {
             <Components.Input
               type="text"
               value={NinNumber}
-              onChange={(event) => setNinNumber(event.target.value)}
-              placeholder="XX-XXXX-XXXXX-XX-X"
+              onChange={(event) => {
+                setNinNumber(event.target.value)
+                validateNationalID(event.target.value)
+              }}
+              placeholder="Please Enter Your National Id Number"
               autocomplete="off"
               autofocus
               title="National ID Input"
@@ -122,8 +144,10 @@ const Home = () => {
               aria-required="true"
               required
               tabindex="1"
+
             />
-            <Components.Button type="submit">Join WaitList</Components.Button>
+             
+            <Components.Button type="submit" >Join WaitList</Components.Button>
           </Components.Form>
         </Components.SignUpContainer>
         <Components.Background></Components.Background>
@@ -137,7 +161,7 @@ const Home = () => {
                 Fill in Your Information to get Your Contact Card
               </Components.Paragraph>
 
-              <Components.GhostButton>Back</Components.GhostButton>
+              <Components.GhostButton onClick={() => toggle(true)} >Back</Components.GhostButton>
             </Components.LeftOverlayPanel>
 
             <Components.RightOverlayPanel signinIn={signIn}>
