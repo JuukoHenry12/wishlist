@@ -28,4 +28,17 @@
     color: #000;
     box-sizing: border-box;
 }
-
+.error {
+    color: firebrick;
+    background-color: rgba(250, 0, 0, 0.07);
+  }
+  
+  .success {
+    color: green;
+    background-color: rgba(0, 200, 0, 0.09);
+  }
+  
+  #errorMessage,
+  #successMessage {
+    display: none;
+  }

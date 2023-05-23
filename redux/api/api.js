@@ -18,4 +18,4 @@ export const submitUserData = async (values) => {
     throw new Error("Error submitting user data");
   }
   return response.json();
-};
+}

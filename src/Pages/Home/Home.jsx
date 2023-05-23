@@ -5,13 +5,13 @@ import "./home.css";
 import { useState } from "react";
 import Select from "react-select";
 import { addUser } from "../../../redux/api/userSlice";
-import { useDispatch, useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
+import Swal from "sweetalert";
 
 const Home = () => {
   const logo =
     "https://d3r6uj6neri5gc.cloudfront.net/static/user/images/logo.png";
-  // const [phone, setphone] = useState();
+
   const [signIn, toggle] = useState(true);
   const [firstname, setfirstName] = useState();
   const [surname, setsurnName] = useState();
@@ -19,10 +19,9 @@ const Home = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [NinNumber, setNinNumber] = useState();
   const [selectedOption, setSelectedOption] = useState(null);
-
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
-  const response = useSelector((state) => state.user.isSuccess);
- 
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const payload = {
@@ -33,16 +32,14 @@ const Home = () => {
       selectedOption: selectedOption.value,
       NinNumber: NinNumber,
     };
-
     dispatch(addUser(payload));
-    console.log(response.success);
+    Swal({
+      title: "Thanks you!",
+      text: "your been added to the Waiting List",
+      confirmButtonText: "OK",
+      icon: "success",
+    });
 
-    if (response.success == true) {
-      return  alert("you been added to the list");
-
-    }else {
-        alert("failed");
-    }
     setfirstName("");
     setsurnName("");
     setEmail("");
@@ -55,6 +52,18 @@ const Home = () => {
     { value: "Kisenyi bus terminal", label: "Kisenyi bus terminal" },
     { value: "Kacyber Offices", label: "Kacyber Offices" },
   ];
+
+  const validatePhone = (phone) => {
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phone)) {
+      setError("Please enter avalid phone number");
+    } else {
+      setError("");
+    }
+  };
+
+
+
   return (
     <div className="mt-20 items-center flex justify-center">
       <Components.Container>
@@ -80,9 +89,10 @@ const Home = () => {
               country={"ug"}
               value={phoneNumber}
               onChange={setPhoneNumber}
+              onBlur={validatePhone}
               required
             />
-
+            {error && <div className="error">{error}</div>}
             <Components.Input
               type="email"
               placeholder="Enter your Email"
@@ -101,10 +111,17 @@ const Home = () => {
 
             <Components.Input
               type="text"
-              placeholder="Nin Number"
               value={NinNumber}
               onChange={(event) => setNinNumber(event.target.value)}
+              placeholder="XX-XXXX-XXXXX-XX-X"
+              autocomplete="off"
+              autofocus
+              title="National ID Input"
+              aria-labelledby="InputLabel"
+              aria-invalid
+              aria-required="true"
               required
+              tabindex="1"
             />
             <Components.Button type="submit">Join WaitList</Components.Button>
           </Components.Form>
@@ -119,6 +136,8 @@ const Home = () => {
               <Components.Paragraph>
                 Fill in Your Information to get Your Contact Card
               </Components.Paragraph>
+
+              <Components.GhostButton>Back</Components.GhostButton>
             </Components.LeftOverlayPanel>
 
             <Components.RightOverlayPanel signinIn={signIn}>
