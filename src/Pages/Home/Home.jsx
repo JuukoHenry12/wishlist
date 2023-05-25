@@ -4,8 +4,8 @@ import "react-phone-input-2/lib/style.css";
 import "./home.css";
 import { useState } from "react";
 import Select from "react-select";
-import { addUser } from "../../../redux/api/userSlice";
-import { useDispatch } from "react-redux";
+import {RegisterUser } from '../../ApiCalls/api'
+
 import Swal from "sweetalert";
 
 const Home = () => {
@@ -23,9 +23,7 @@ const Home = () => {
   const [isValid, setIsValid] = useState(false);
 
 
-  const dispatch = useDispatch();
-
-  const handleSubmit = (event) => {
+  const handleSubmit =async (event) => {
     event.preventDefault();
     const payload = {
       firstname: firstname,
@@ -35,13 +33,28 @@ const Home = () => {
       selectedOption: selectedOption.value,
       NinNumber: NinNumber,
     };
-    dispatch(addUser(payload));
-    Swal({
-      title: "Thanks you!",
-      text: "your been added to the Waiting List",
-      confirmButtonText: "OK",
-      icon: "success",
-    });
+ 
+    try{
+      
+      const response = await RegisterUser(payload)
+        
+       if(response.success){
+      
+          Swal({
+            title: "Thanks you!",
+            text: "your been added to the Waiting List",
+            confirmButtonText: "OK",
+            icon: "success",
+          });
+     
+        }else {
+           throw new Error(response.message)
+        }
+      }catch(error){
+ 
+         console.log(error.message)
+     }
+  
 
     setfirstName("");
     setsurnName("");
