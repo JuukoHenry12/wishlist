@@ -7,6 +7,8 @@ import Select from "react-select";
 import { addUser } from "../../../redux/api/userSlice";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
+import logo2 from '../../assets/logo2.png'
 
 const Home = () => {
   const logo =
@@ -21,6 +23,7 @@ const Home = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [error, setError] = useState("");
   const [isValid, setIsValid] = useState(false);
+  const navigate =useNavigate()
 
 
   const dispatch = useDispatch();
@@ -38,11 +41,11 @@ const Home = () => {
     dispatch(addUser(payload));
     Swal({
       title: "Thanks you!",
-      text: "your been added to the Waiting List",
+      text: "Your been added to the Waiting List",
       confirmButtonText: "OK",
       icon: "success",
     });
-
+    navigate("/cardpayment")
     setfirstName("");
     setsurnName("");
     setEmail("");
@@ -108,7 +111,7 @@ const Home = () => {
               country={"ug"}
               value={phoneNumber}
               onChange={setPhoneNumber}
-              onBlur={validatePhone}
+           
               required
             />
             {error && <div className="error">{error}</div>}
@@ -155,7 +158,7 @@ const Home = () => {
         <Components.OverlayContainer signinIn={signIn}>
           <Components.Overlay signinIn={signIn}>
             <Components.LeftOverlayPanel signinIn={signIn}>
-              <img src={logo} width="200px" height="200px" />
+              <img src={logo2} width="200px" height="200px" />
               <Components.Title>Swap & Pay </Components.Title>
               <Components.Paragraph>
                 Fill in Your Information to get Your Contact Card
@@ -165,7 +168,7 @@ const Home = () => {
             </Components.LeftOverlayPanel>
 
             <Components.RightOverlayPanel signinIn={signIn}>
-              <img src={logo} width="200px" height="200px" />
+              <img src={logo2} width="200px" height="200px" />
               <Components.Title>Hello, Friends!</Components.Title>
               <Components.Paragraph>
                 Enter Your personal details and start Contact less Jounery

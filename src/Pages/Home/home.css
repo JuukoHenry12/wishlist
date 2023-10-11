@@ -1,4 +1,6 @@
-
+*{
+  fontfamily:'poppins';
+}
 .react-tel-input {
     margin-left: 10px;
     border-radius:15px;
@@ -42,3 +44,5 @@
   #successMessage {
     display: none;
   }
+
+

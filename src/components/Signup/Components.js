@@ -9,6 +9,7 @@ export const Container = styled.div`
   width: 878px;
   max-width: 100%;
   min-height: 450px;
+
 `;
 
 export const SignUpContainer = styled.div`
@@ -69,9 +70,9 @@ width:90%;
 
 export const Button = styled.button`
   border-radius: 20px;
-  border: 1px solid #ff4b2b;
-  background-color: #ff4b2b;
-  color: #ffffff;
+  border: 1px solid #fff;
+  background-color: #a9bf04;
+  color: #fff;
   font-size: 12px;
   font-weight: bold;
   padding: 8px 35px;
@@ -111,8 +112,8 @@ export const OverlayContainer = styled.div`
 
 export const Overlay = styled.div`
   background: #ff416c;
-  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  background: rgb(3,85,166);
+  background: linear-gradient(90deg, rgba(3,85,166,1) 0%, rgba(169,191,4,1) 89%);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;
@@ -127,7 +128,7 @@ export const Overlay = styled.div`
 `;
 
 export const Background = styled.div`
-  background-image: url("https://wappoint.co.za/wp-content/uploads/2021/01/nfc-contactless-payment.jpg");
+  background-image: url("https://sc04.alicdn.com/kf/Hf49dbf8b14244cf8b1203572226032ebv.png");
   background-repeat: no-repeat;
   background-position: center center;
   height: 460px;
