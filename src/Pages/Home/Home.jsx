@@ -10,6 +10,7 @@ import Swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import logo2 from '../../assets/logo2.png'
 
+
 const Home = () => {
   const logo =
     "https://d3r6uj6neri5gc.cloudfront.net/static/user/images/logo.png";

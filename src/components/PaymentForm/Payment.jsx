@@ -3,31 +3,44 @@
 import { GrSecure } from "react-icons/gr";
 import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import PhoneInput from "react-phone-input-2";
+import Swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 export default function Form() {
     const logo =
     "https://d3r6uj6neri5gc.cloudfront.net/static/user/images/logo.png";
 //   const navigate = useNavigate();
   const [name,setName] = useState()
+  const [email,setEmail] = useState()
   const [phone,setphone]=useState()
+  const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
-    const randomNumber = Math.random();
-    const id = randomNumber.toString(36).substring(2, length + 2);
-    const payload= {
-            "amount": "15,000",
-            "currency": "EUR",
-            "externalId": id,
-            "payer": {
-                "partyIdType": "MSISDN",
-                "partyId": phone
-            },
-            "payerMessage": "card payment",
-            "payeeNote":  "card payment"
-     }
-    
-    console.log(payload)
+ 
+      const amount=15000
+      const payload= {
+            amount:amount,
+            name,
+            email,
+            phone,
+      }
+      
+
+      const response =await axios.post("http://localhost:8000/api/cardpayment/mtn-pay",payload)
+      console.log(response)
+      if(response.status === 200){
+        Swal({
+          title: "Thanks you!",
+          text: response.data.message,
+          confirmButtonText: "OK",
+          icon: "success",
+        });
+        navigate("/cardpayment")
+      }else {
+        alert("token expired")
+      }
   };
 
   return (
@@ -51,6 +64,12 @@ export default function Form() {
                 className="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
                 value={name}
                 onChange={(event)=>setName(event.target.value)}
+            />
+               <label> Email  </label>
+             <input name="NomDuClient" 
+                className="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+                value={email}
+                onChange={(event)=>setEmail(event.target.value)}
             />
             <label>Phone Number  </label>
             <PhoneInput

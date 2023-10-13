@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const Container = styled.div`
   background-color: #fff;
   border-radius: 10px;
@@ -9,8 +10,8 @@ export const Container = styled.div`
   width: 878px;
   max-width: 100%;
   min-height: 450px;
-
-`;
+`
+;
 
 export const SignUpContainer = styled.div`
   position: absolute;
@@ -167,3 +168,4 @@ export const Paragraph = styled.p`
   letter-spacing: 0.5px;
   margin: 20px 0 30px;
 `;
+
