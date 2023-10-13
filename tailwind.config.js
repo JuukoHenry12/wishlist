@@ -3,6 +3,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {
@@ -14,5 +15,8 @@ export default {
       lime:'#6BB836'
     }
   },
-  plugins: [],
+  plugins: [
+    // eslint-disable-next-line no-undef
+    require('flowbite/plugin')
+  ],
 }

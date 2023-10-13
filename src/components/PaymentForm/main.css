@@ -124,6 +124,16 @@ input{
   color: #fff;
   border-radius: 10px;
 }
+.btn2{
+  width: 150px;
+  margin-top: 10px;
+  height: 45px;
+  border: none;
+  cursor: pointer; 
+  background-color:#800080;
+  color: #fff;
+  border-radius: 10px;
+}
 .img1 {
   width: 200px;
   height: 55px;
@@ -134,6 +144,16 @@ input{
 }
 footer {
   display: flex;
+}
+.container2 {
+  max-width: 1200px; /* Set a maximum width for the container */
+  margin: 0 auto;    /* Center the container horizontally */
+  padding: 20px;     /* Add some padding to the container */
+}
+.card {
+  background-color: #f5f5f5; /* Adjust the color code to your preference */
+  padding: 20px; /* Add padding to give some spacing */
+  border-radius: 10px; /* Add rounded corners to the background */
 }
 /* .react-tel-input .selected-flag {
   outline: none;

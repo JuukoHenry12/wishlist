@@ -7,6 +7,8 @@ import axios from "axios";
 import PhoneInput from "react-phone-input-2";
 import Swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import { useTotal } from '../../../TotalContext/TotalContext';
+
 export default function Form() {
     const logo =
     "https://d3r6uj6neri5gc.cloudfront.net/static/user/images/logo.png";
@@ -14,21 +16,20 @@ export default function Form() {
   const [name,setName] = useState()
   const [email,setEmail] = useState()
   const [phone,setphone]=useState()
+  const { total } = useTotal();
+
   const navigate = useNavigate()
 
   const handleSubmit =async (e) => {
-    e.preventDefault();
- 
-      const amount=15000
+     e.preventDefault();
+     const amount=15000
       const payload= {
             amount:amount,
             name,
             email,
             phone,
       }
-      
-
-      const response =await axios.post("http://localhost:8000/api/cardpayment/mtn-pay",payload)
+       const response =await axios.post("http://localhost:8000/api/cardpayment/mtn-pay",payload)
       console.log(response)
       if(response.status === 200){
         Swal({
@@ -56,7 +57,7 @@ export default function Form() {
             </div>
             <div className="Amont">
             <p> Amount : </p>
-            <label className="price">UGX 15,000</label>
+            <label className="price">{total}</label>
             </div>
             <div className="NomDuClient">
             <label> Name  </label>
