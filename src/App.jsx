@@ -1,7 +1,7 @@
 import "./App.css";
 import Home from "./Pages/Home/Home";
 import Payment from "./components/PaymentForm/Payment"
-import CardPayment from "./components/CardPayment"
+import CardPayment from "./components/CardPayment/CardPayment"
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {TotalProvider} from '../TotalContext/TotalContext'
 

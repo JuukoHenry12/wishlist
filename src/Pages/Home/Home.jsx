@@ -12,8 +12,8 @@ import logo2 from '../../assets/logo2.png'
 
 
 const Home = () => {
-  const logo =
-    "https://d3r6uj6neri5gc.cloudfront.net/static/user/images/logo.png";
+  // const logo =
+  //   "https://d3r6uj6neri5gc.cloudfront.net/static/user/images/logo.png";
 
   const [signIn, toggle] = useState(true);
   const [firstname, setfirstName] = useState();
@@ -22,8 +22,8 @@ const Home = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [NinNumber, setNinNumber] = useState();
   const [selectedOption, setSelectedOption] = useState(null);
-  const [error, setError] = useState("");
-  const [isValid, setIsValid] = useState(false);
+  // const [error, setError] = useState("");
+  // const [isValid, setIsValid] = useState(false);
   const navigate =useNavigate()
 
 
@@ -60,32 +60,32 @@ const Home = () => {
     { value: "Kacyber Offices", label: "Kacyber Offices" },
   ];
 
-  const validatePhone = (phone) => {
-    const phoneRegex = /^\d{10}$/;
-    if (!phoneRegex.test(phone)) {
-      setError("Please enter avalid phone number");
-    } else {
-      setError("");
-    }
-  };
+  // const validatePhone = (phone) => {
+  //   const phoneRegex = /^\d{10}$/;
+  //   if (!phoneRegex.test(phone)) {
+  //     setError("Please enter avalid phone number");
+  //   } else {
+  //     setError("");
+  //   }
+  // };
 
 
-  const validateNationalID=()=>{
-    const pattern = /^([CP])(\d{2})(\d{2})(\d{2})(\d{4})(\d)$/;
-    if(!pattern.test(NinNumber)){
-      setIsValid(false)
-      return ;
-    }
-    const [ year, month, day, uniqueID, checkDigit] =NinNumber.match(pattern);
+  // const validateNationalID=()=>{
+  //   const pattern = /^([CP])(\d{2})(\d{2})(\d{2})(\d{4})(\d)$/;
+  //   if(!pattern.test(NinNumber)){
+  //     setIsValid(false)
+  //     return ;
+  //   }
+  //   const [ year, month, day, uniqueID, checkDigit] =NinNumber.match(pattern);
 
-    // Calculate check digit
-    const calculatedCheckDigit = (parseInt(year) +
-      parseInt(month) +
-      parseInt(day) +
-      parseInt(uniqueID)) % 10;
+  //   // Calculate check digit
+  //   const calculatedCheckDigit = (parseInt(year) +
+  //     parseInt(month) +
+  //     parseInt(day) +
+  //     parseInt(uniqueID)) % 10;
 
-    setIsValid(parseInt(checkDigit) === calculatedCheckDigit);
-  }
+  //   setIsValid(parseInt(checkDigit) === calculatedCheckDigit);
+  // }
 
   return (
     <div className="mt-20 items-center flex justify-center">
@@ -115,7 +115,7 @@ const Home = () => {
            
               required
             />
-            {error && <div className="error">{error}</div>}
+            {/* {error && <div className="error">{error}</div>} */}
             <Components.Input
               type="email"
               placeholder="Enter your Email"
@@ -137,7 +137,7 @@ const Home = () => {
               value={NinNumber}
               onChange={(event) => {
                 setNinNumber(event.target.value)
-                validateNationalID(event.target.value)
+                // validateNationalID(event.target.value)
               }}
               placeholder="Please Enter Your National Id Number"
               autocomplete="off"

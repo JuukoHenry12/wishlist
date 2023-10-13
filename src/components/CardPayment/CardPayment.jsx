@@ -1,9 +1,9 @@
 import { Table, Card } from "flowbite-react";
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useTotal } from '../../../TotalContext/TotalContext';
 import { useNavigate } from "react-router-dom";
 
-const Index = () => {
+const CardPayment = () => {
   const [Rectnumber, setRectNumber] = useState(0);
   const [Cirnumber, setCirNumber] = useState(0);
   const [Trinumber, setTriNumber] = useState(0);
@@ -109,4 +109,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default CardPayment;
