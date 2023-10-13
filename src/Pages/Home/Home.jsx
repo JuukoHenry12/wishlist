@@ -46,7 +46,7 @@ const Home = () => {
       confirmButtonText: "OK",
       icon: "success",
     });
-    navigate("/cardpayment")
+    navigate("/cardShop")
     setfirstName("");
     setsurnName("");
     setEmail("");
