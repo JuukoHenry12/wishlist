@@ -10,10 +10,8 @@ export const Container = styled.div`
   width: 578px;
   max-width: 100%;
   min-height: 554px;
-  background: #ff416c;
-  background: rgb(3,85,166);
-  background: linear-gradient(90deg, rgba(3,85,166,1) 0%, rgba(169,191,4,1) 89%);
-  background-repeat: no-repeat;
+  background: #fff;
+
 `
 ;
 
@@ -56,10 +54,8 @@ export const Form = styled.form`
   padding: 0 50px;
   height: 100%;
   text-align: center;
-  background: #ff416c;
-  background: rgb(3,85,166);
-  background: linear-gradient(90deg, rgba(3,85,166,1) 0%, rgba(169,191,4,1) 89%);
-  background-repeat: no-repeat;
+  background: #fff;
+
 `;
 
 export const Title = styled.h1`

@@ -96,7 +96,7 @@ const Home = () => {
             className="mx-auto mt-2 mb-2"
           />
           <Components.Form onSubmit={handleSubmit}>
-            <Components.Title>Join Swap and Pay </Components.Title>
+            <Components.Title>Join Swipe and Pay </Components.Title>
 
             <Components.Input
               type="text"
