@@ -8,8 +8,7 @@ import { addUser } from "../../../redux/api/userSlice";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
-import logo2 from '../../assets/logo2.png'
-
+import logo2 from "../../assets/logo2.png";
 
 const Home = () => {
   // const logo =
@@ -24,8 +23,7 @@ const Home = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   // const [error, setError] = useState("");
   // const [isValid, setIsValid] = useState(false);
-  const navigate =useNavigate()
-
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -39,6 +37,7 @@ const Home = () => {
       selectedOption: selectedOption.value,
       NinNumber: NinNumber,
     };
+    console.log(payload)
     dispatch(addUser(payload));
     Swal({
       title: "Thanks you!",
@@ -46,7 +45,7 @@ const Home = () => {
       confirmButtonText: "OK",
       icon: "success",
     });
-    navigate("/cardShop")
+    navigate("/");
     setfirstName("");
     setsurnName("");
     setEmail("");
@@ -69,7 +68,6 @@ const Home = () => {
   //   }
   // };
 
-
   // const validateNationalID=()=>{
   //   const pattern = /^([CP])(\d{2})(\d{2})(\d{2})(\d{4})(\d)$/;
   //   if(!pattern.test(NinNumber)){
@@ -88,9 +86,15 @@ const Home = () => {
   // }
 
   return (
-    <div className="mt-20 items-center flex justify-center">
+    <div className="mt-5 items-center flex justify-center">
       <Components.Container>
-        <Components.SignUpContainer signinIn={signIn}>
+        <div className="mobile">
+          <img
+            src="https://kacyber.africa/wp-content/uploads/2021/11/kacyberlgogo.png"
+            width="200px"
+            height="200px"
+            className="mx-auto mt-2 mb-2"
+          />
           <Components.Form onSubmit={handleSubmit}>
             <Components.Title>Join Swap and Pay </Components.Title>
 
@@ -108,14 +112,14 @@ const Home = () => {
               onChange={(event) => setsurnName(event.target.value)}
               required
             />
-            <PhoneInput
-              country={"ug"}
+
+            <Components.Input
+              type="text"
+              placeholder="Please Enter your Phone Number"
               value={phoneNumber}
-              onChange={setPhoneNumber}
-           
+              onChange={(event) => setPhoneNumber(event.target.value)}
               required
             />
-            {/* {error && <div className="error">{error}</div>} */}
             <Components.Input
               type="email"
               placeholder="Enter your Email"
@@ -136,7 +140,7 @@ const Home = () => {
               type="text"
               value={NinNumber}
               onChange={(event) => {
-                setNinNumber(event.target.value)
+                setNinNumber(event.target.value);
                 // validateNationalID(event.target.value)
               }}
               placeholder="Please Enter Your National Id Number"
@@ -148,38 +152,12 @@ const Home = () => {
               aria-required="true"
               required
               tabindex="1"
-
             />
-             
-            <Components.Button type="submit" >Join WaitList</Components.Button>
+            <div className="mt-2 mb-2">
+              <Components.Button type="submit">Join WaitList</Components.Button>
+            </div>
           </Components.Form>
-        </Components.SignUpContainer>
-        <Components.Background></Components.Background>
-
-        <Components.OverlayContainer signinIn={signIn}>
-          <Components.Overlay signinIn={signIn}>
-            <Components.LeftOverlayPanel signinIn={signIn}>
-              <img src={logo2} width="200px" height="200px" />
-              <Components.Title>Swap & Pay </Components.Title>
-              <Components.Paragraph>
-                Fill in Your Information to get Your Contact Card
-              </Components.Paragraph>
-
-              <Components.GhostButton onClick={() => toggle(true)} >Back</Components.GhostButton>
-            </Components.LeftOverlayPanel>
-
-            <Components.RightOverlayPanel signinIn={signIn}>
-              <img src={logo2} width="200px" height="200px" />
-              <Components.Title>Hello, Friends!</Components.Title>
-              <Components.Paragraph>
-                Enter Your personal details and start Contact less Jounery
-              </Components.Paragraph>
-              <Components.GhostButton onClick={() => toggle(false)}>
-                Join WaitList
-              </Components.GhostButton>
-            </Components.RightOverlayPanel>
-          </Components.Overlay>
-        </Components.OverlayContainer>
+        </div>
       </Components.Container>
     </div>
   );

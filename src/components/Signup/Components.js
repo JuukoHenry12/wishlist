@@ -7,9 +7,13 @@ export const Container = styled.div`
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
-  width: 878px;
+  width: 578px;
   max-width: 100%;
-  min-height: 450px;
+  min-height: 554px;
+  background: #ff416c;
+  background: rgb(3,85,166);
+  background: linear-gradient(90deg, rgba(3,85,166,1) 0%, rgba(169,191,4,1) 89%);
+  background-repeat: no-repeat;
 `
 ;
 
@@ -45,7 +49,6 @@ export const SignInContainer = styled.div`
 `;
 
 export const Form = styled.form`
-  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,6 +56,10 @@ export const Form = styled.form`
   padding: 0 50px;
   height: 100%;
   text-align: center;
+  background: #ff416c;
+  background: rgb(3,85,166);
+  background: linear-gradient(90deg, rgba(3,85,166,1) 0%, rgba(169,191,4,1) 89%);
+  background-repeat: no-repeat;
 `;
 
 export const Title = styled.h1`
