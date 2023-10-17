@@ -14,15 +14,14 @@ const Home = () => {
   // const logo =
   //   "https://d3r6uj6neri5gc.cloudfront.net/static/user/images/logo.png";
 
-  const [signIn, toggle] = useState(true);
+  // const [signIn, toggle] = useState(true);
   const [firstname, setfirstName] = useState();
   const [surname, setsurnName] = useState();
   const [email, setEmail] = useState();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [NinNumber, setNinNumber] = useState();
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [isClearable, setIsClearable] = useState(true);
-  const [isSearchable, setIsSearchable] = useState(true);
+  const [selectedValue, setSelectedValue] = useState("");
+
   // const [error, setError] = useState("");
   // const [isValid, setIsValid] = useState(false);
   const navigate = useNavigate();
@@ -36,10 +35,10 @@ const Home = () => {
       surname: surname,
       email: email,
       phoneNumber: phoneNumber,
-      selectedOption: selectedOption.value,
+      selectedOption: selectedValue,
       NinNumber: NinNumber,
     };
-    console.log(payload);
+    // console.log(payload);
     dispatch(addUser(payload));
     Swal({
       title: "Thanks you!",
@@ -53,18 +52,31 @@ const Home = () => {
     setEmail("");
     setPhoneNumber("");
     setNinNumber("");
-    setSelectedOption("");
+    setSelectedValue("");
   };
 
   const options = [
     { value: "KaCyber Offices", label: "KaCyber Offices" },
     { value: "NationalICTInnovationHub", label: "National ICT Innovation Hub" },
-    { value: "KiiraMotorsVehiclePlant - Jinja", label:"Kiira Motors Vehicle Plant - Jinja" },
-    { value: "KiesnyiBusTerminal - Starlink Office", label: "Kiesnyi Bus Terminal - Starlink Office" },
+    {
+      value: "KiiraMotorsVehiclePlant - Jinja",
+      label: "Kiira Motors Vehicle Plant - Jinja",
+    },
+    {
+      value: "KiesnyiBusTerminal - Starlink Office",
+      label: "Kiesnyi Bus Terminal - Starlink Office",
+    },
     { value: "NtindaAponyeMall", label: "Ntinda Aponye Mall" },
-    { value: "NamayibaBusParkRoblynCoachesOffice", label: "Namayiba Bus Park - Roblyn Coaches Office" },
+    {
+      value: "NamayibaBusParkRoblynCoachesOffice",
+      label: "Namayiba Bus Park - Roblyn Coaches Office",
+    },
   ];
 
+  const handleSelectChange = (event) => {
+    const selectedOption = event.target.value;
+    setSelectedValue(selectedOption);
+  };
   // const validatePhone = (phone) => {
   //   const phoneRegex = /^\d{10}$/;
   //   if (!phoneRegex.test(phone)) {
@@ -126,6 +138,7 @@ const Home = () => {
               onChange={(event) => setPhoneNumber(event.target.value)}
               required
             />
+
             <Components.Input
               type="email"
               placeholder="Enter your Email"
@@ -149,18 +162,22 @@ const Home = () => {
               required
               tabindex="1"
             />
-            
-            <Select
-              className="select"
-              placeholder="Pick location"
-              value={selectedOption}
-              onChange={setSelectedOption}
-              options={options}
-              isClearable={isClearable}
-              isSearchable={isSearchable}
-              required
-            />
 
+            <div style={{ width: "91%" }}>
+              <select
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+                onChange={handleSelectChange}
+              >
+                <option value="" disabled selected hidden>
+                  Pick Location
+                </option>
+                {options.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="mt-2 mb-2">
               <Components.Button type="submit">Apply</Components.Button>
             </div>
