@@ -21,6 +21,8 @@ const Home = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [NinNumber, setNinNumber] = useState();
   const [selectedOption, setSelectedOption] = useState(null);
+  const [isClearable, setIsClearable] = useState(true);
+  const [isSearchable, setIsSearchable] = useState(true);
   // const [error, setError] = useState("");
   // const [isValid, setIsValid] = useState(false);
   const navigate = useNavigate();
@@ -37,7 +39,7 @@ const Home = () => {
       selectedOption: selectedOption.value,
       NinNumber: NinNumber,
     };
-    console.log(payload)
+    console.log(payload);
     dispatch(addUser(payload));
     Swal({
       title: "Thanks you!",
@@ -55,8 +57,12 @@ const Home = () => {
   };
 
   const options = [
-    { value: "Kisenyi bus terminal", label: "Kisenyi bus terminal" },
-    { value: "Kacyber Offices", label: "Kacyber Offices" },
+    { value: "KaCyber Offices", label: "KaCyber Offices" },
+    { value: "NationalICTInnovationHub", label: "National ICT Innovation Hub" },
+    { value: "KiiraMotorsVehiclePlant - Jinja", label:"Kiira Motors Vehicle Plant - Jinja" },
+    { value: "KiesnyiBusTerminal - Starlink Office", label: "Kiesnyi Bus Terminal - Starlink Office" },
+    { value: "NtindaAponyeMall", label: "Ntinda Aponye Mall" },
+    { value: "NamayibaBusParkRoblynCoachesOffice", label: "Namayiba Bus Park - Roblyn Coaches Office" },
   ];
 
   // const validatePhone = (phone) => {
@@ -96,18 +102,18 @@ const Home = () => {
             className="mx-auto mt-2 mb-2"
           />
           <Components.Form onSubmit={handleSubmit}>
-            <Components.Title>Join Swipe and Pay </Components.Title>
+            <Components.Title>Apply for KaCyber Card </Components.Title>
 
             <Components.Input
               type="text"
-              placeholder="Please Enter your First Name"
+              placeholder="Enter your First Name"
               value={firstname}
               onChange={(event) => setfirstName(event.target.value)}
               required
             />
             <Components.Input
               type="text"
-              placeholder="Please Enter your Surname"
+              placeholder="Enter your Surname"
               value={surname}
               onChange={(event) => setsurnName(event.target.value)}
               required
@@ -115,7 +121,7 @@ const Home = () => {
 
             <Components.Input
               type="text"
-              placeholder="Please Enter your Phone Number"
+              placeholder="Enter your Phone Number"
               value={phoneNumber}
               onChange={(event) => setPhoneNumber(event.target.value)}
               required
@@ -125,17 +131,7 @@ const Home = () => {
               placeholder="Enter your Email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              required
             />
-            <Select
-              className="select"
-              placeholder="Select Place of Pick Up"
-              value={selectedOption}
-              onChange={setSelectedOption}
-              options={options}
-              required
-            />
-
             <Components.Input
               type="text"
               value={NinNumber}
@@ -143,7 +139,7 @@ const Home = () => {
                 setNinNumber(event.target.value);
                 // validateNationalID(event.target.value)
               }}
-              placeholder="Please Enter Your National Id Number"
+              placeholder="Enter Your National Id Number"
               autocomplete="off"
               autofocus
               title="National ID Input"
@@ -153,8 +149,20 @@ const Home = () => {
               required
               tabindex="1"
             />
+            
+            <Select
+              className="select"
+              placeholder="Pick location"
+              value={selectedOption}
+              onChange={setSelectedOption}
+              options={options}
+              isClearable={isClearable}
+              isSearchable={isSearchable}
+              required
+            />
+
             <div className="mt-2 mb-2">
-              <Components.Button type="submit">Join WaitList</Components.Button>
+              <Components.Button type="submit">Apply</Components.Button>
             </div>
           </Components.Form>
         </div>
