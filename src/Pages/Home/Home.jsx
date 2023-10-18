@@ -104,7 +104,8 @@ const Home = () => {
   // }
 
   return (
-    <div className="mt-5 items-center flex justify-center">
+    <div>
+        <div className="mt-5 items-center flex justify-center">
       <Components.Container>
         <div className="mobile">
           <img
@@ -114,7 +115,7 @@ const Home = () => {
             className="mx-auto mt-2 mb-2"
           />
           <Components.Form onSubmit={handleSubmit}>
-            <Components.Title>Apply for KaCyber Card </Components.Title>
+            <Components.Title>Apply for KaCyberGo Card </Components.Title>
 
             <Components.Input
               type="text"
@@ -184,6 +185,9 @@ const Home = () => {
           </Components.Form>
         </div>
       </Components.Container>
+   
+    </div>
+       <p className="text-center" >©2023 KaCyber Technologies. All Rights Reserved. </p>
     </div>
   );
 };
