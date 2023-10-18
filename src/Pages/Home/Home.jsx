@@ -153,7 +153,7 @@ const Home = () => {
                 setNinNumber(event.target.value);
                 // validateNationalID(event.target.value)
               }}
-              placeholder="Enter Your National Id Number"
+              placeholder="Enter Your National ID Number"
               autocomplete="off"
               autofocus
               title="National ID Input"

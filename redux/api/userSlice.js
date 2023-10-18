@@ -1,7 +1,7 @@
 import { createSlice,  createAsyncThunk   } from "@reduxjs/toolkit";
 
 export const addUser= createAsyncThunk("user/addUser", async(values)=>{
-    return fetch("http://localhost:5000/api/waitlist", { method:"POST",
+    return fetch("https://kacyber.io/api/user/waitlist", { method:"POST",
     headers:{Accept:"application/json", "Content-Type":"application/json"} ,
     body: JSON.stringify({
          firstname: values.firstname,
