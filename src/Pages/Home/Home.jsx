@@ -1,14 +1,12 @@
 import * as Components from "../../components/Signup/Components";
-import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "./home.css";
 import { useState } from "react";
-import Select from "react-select";
 import { addUser } from "../../../redux/api/userSlice";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
-import logo2 from "../../assets/logo2.png";
+import { TextInput } from "flowbite-react";
 
 const Home = () => {
   // const logo =
@@ -21,15 +19,48 @@ const Home = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [NinNumber, setNinNumber] = useState();
   const [selectedValue, setSelectedValue] = useState("");
+ 
+  const [phoneError, setPhoneError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
-  // const [error, setError] = useState("");
-  // const [isValid, setIsValid] = useState(false);
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
+
+    const validateUgandanPhoneNumber = (phone) => {
+      const phoneRegex = /^07[0-9]{8}$/; // Ugandan phone format regex
+      return phoneRegex.test(phone);
+    };
+
+    const validateEmail = (email) => {
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      return emailRegex.test(email);
+    };
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const isUgandanPhoneValid = validateUgandanPhoneNumber(phoneNumber);
+
+    if (!isUgandanPhoneValid) {
+      setPhoneError("Please enter a valid Ugandan phone number (e.g., 0712345678).");
+      return;
+    }
+
+    // Reset phone error if it was previously set
+    setPhoneError("");
+
+    const isEmailValid = validateEmail(email);
+
+    if (!isEmailValid) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    }
+
+    // Reset email error if it was previously set
+    setEmailError("");
+
     const payload = {
       firstname: firstname,
       surname: surname,
@@ -77,31 +108,7 @@ const Home = () => {
     const selectedOption = event.target.value;
     setSelectedValue(selectedOption);
   };
-  // const validatePhone = (phone) => {
-  //   const phoneRegex = /^\d{10}$/;
-  //   if (!phoneRegex.test(phone)) {
-  //     setError("Please enter avalid phone number");
-  //   } else {
-  //     setError("");
-  //   }
-  // };
 
-  // const validateNationalID=()=>{
-  //   const pattern = /^([CP])(\d{2})(\d{2})(\d{2})(\d{4})(\d)$/;
-  //   if(!pattern.test(NinNumber)){
-  //     setIsValid(false)
-  //     return ;
-  //   }
-  //   const [ year, month, day, uniqueID, checkDigit] =NinNumber.match(pattern);
-
-  //   // Calculate check digit
-  //   const calculatedCheckDigit = (parseInt(year) +
-  //     parseInt(month) +
-  //     parseInt(day) +
-  //     parseInt(uniqueID)) % 10;
-
-  //   setIsValid(parseInt(checkDigit) === calculatedCheckDigit);
-  // }
 
   return (
     <div>
@@ -117,38 +124,44 @@ const Home = () => {
           <Components.Form onSubmit={handleSubmit}>
             <Components.Title>Apply for KaCyberGo Card </Components.Title>
 
-            <Components.Input
+            <TextInput
               type="text"
               placeholder="Enter your First Name"
               value={firstname}
               onChange={(event) => setfirstName(event.target.value)}
+              className="w-full mb-2 mt-2"
               required
             />
-            <Components.Input
+            <TextInput
               type="text"
               placeholder="Enter your Surname"
               value={surname}
+              className="w-full mb-2"
               onChange={(event) => setsurnName(event.target.value)}
               required
             />
 
-            <Components.Input
-              type="text"
+            <TextInput
+              type="phone"
               placeholder="Enter your Phone Number"
               value={phoneNumber}
+              className="w-full mb-2"
               onChange={(event) => setPhoneNumber(event.target.value)}
               required
             />
-
-            <Components.Input
+               {phoneError && <p className="text-red-500">{phoneError}</p>}
+            <TextInput
               type="email"
               placeholder="Enter your Email"
-              value={email}
+              value={email} 
+              className="w-full mb-2"
               onChange={(event) => setEmail(event.target.value)}
             />
-            <Components.Input
+             {emailError && <p className="text-red-500">{emailError}</p>}
+            <TextInput
               type="text"
               value={NinNumber}
+              className="w-full mb-2"
               onChange={(event) => {
                 setNinNumber(event.target.value);
                 // validateNationalID(event.target.value)
@@ -164,7 +177,7 @@ const Home = () => {
               tabindex="1"
             />
 
-            <div style={{ width: "91%" }}>
+            <div style={{ width: "100%" }}>
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
                 onChange={handleSelectChange}
