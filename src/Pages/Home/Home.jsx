@@ -1,12 +1,13 @@
 import * as Components from "../../components/Signup/Components";
 import "react-phone-input-2/lib/style.css";
 import "./home.css";
-import { useState } from "react";
+import { useState,useRef } from "react";
 import { addUser } from "../../../redux/api/userSlice";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import { TextInput } from "flowbite-react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Home = () => {
   // const logo =
@@ -19,6 +20,11 @@ const Home = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [NinNumber, setNinNumber] = useState();
   const [selectedValue, setSelectedValue] = useState("");
+
+  const [recaptchaValue, setRecaptchaValue] = useState(""); // To store the ReCAPTCHA response
+  const [showRecaptcha, setShowRecaptcha] = useState(false);
+
+  const recaptchaRef = useRef();
  
   const [phoneError, setPhoneError] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -61,6 +67,13 @@ const Home = () => {
     // Reset email error if it was previously set
     setEmailError("");
 
+      // Check if ReCAPTCHA is solved
+      if (!recaptchaValue) {
+      // If ReCAPTCHA is not solved, show ReCAPTCHA
+      setShowRecaptcha(true);
+      return;
+    }
+
     const payload = {
       firstname: firstname,
       surname: surname,
@@ -77,14 +90,18 @@ const Home = () => {
       confirmButtonText: "OK",
       icon: "success",
     });
-    navigate("/");
-    setfirstName("");
-    setsurnName("");
-    setEmail("");
-    setPhoneNumber("");
-    setNinNumber("");
-    setSelectedValue("");
-  };
+    // Show ReCAPTCHA on submission failure
+    setShowRecaptcha(true);
+    // Reset ReCAPTCHA value
+    setRecaptchaValue("");
+      navigate("/");
+      setfirstName("");
+      setsurnName("");
+      setEmail("");
+      setPhoneNumber("");
+      setNinNumber("");
+      setSelectedValue("");
+    };
 
   const options = [
     { value: "KaCyber Offices", label: "KaCyber Offices" },
@@ -108,6 +125,12 @@ const Home = () => {
     const selectedOption = event.target.value;
     setSelectedValue(selectedOption);
   };
+
+    const handleRecaptchaChange = (value) => {
+      // This function will be called when the user solves the reCAPTCHA.
+      // You can store the ReCAPTCHA response in state.
+      setRecaptchaValue(value);
+    };
 
 
   return (
@@ -192,6 +215,17 @@ const Home = () => {
                 ))}
               </select>
             </div>
+            <div>      
+                {showRecaptcha && (
+                  <div style={{ position: 'absolute', bottom: 0, right: 0 }}>
+                          <ReCAPTCHA
+                            sitekey="6Lda_sYoAAAAAPW4yhB_N_UL3rgU_Wi_vZ8wM3QQ"
+                            onChange={handleRecaptchaChange}
+                            ref={recaptchaRef}
+                          />
+                        </div>
+                      )}
+             </div>
             <div className="mt-2 mb-2">
               <Components.Button type="submit">Apply</Components.Button>
             </div>
